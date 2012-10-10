@@ -1,0 +1,68 @@
+!!!
+%head
+	%meta{ :charset => 'utf-8' }
+	%meta{ :'http-equiv' => "X-UA-Compatible", :content => "IE=edge,chrome=1" }
+
+	%title= "Top Ten #{@artist_name} Tracks"
+	%meta{ :name => "description",  :content => "Just the top ten tracks for #{@artist_name}!" }
+	%meta{ :name => "author",       :content => "Liam Anderson" }
+
+	%meta{ :name => "viewport",     :content => "width=device-width" }
+
+	%link{ :rel => "stylesheet",    :href => "//fonts.googleapis.com/css?family=Open+Sans:400,300,600" }
+	%link{ :rel => "stylesheet",    :href => "/css/bootstrap.min.css" }
+	%link{ :rel => "stylesheet",    :href => "/css/main.css" }
+
+%body
+	.container
+		.row
+			.page-header.span12
+				%h1.pull-left
+					=@artist_name
+					%small top ten tracks
+				%form.form-search.pull-right
+					.input-append
+						%input.input-large.search-query{:type => "text", :placeholder => "Search for Artist"}
+						%button.btn
+							%i.icon-search
+					.btn-group
+						.btn.btn-inverse{:onclick => "player.previousVideo();"}
+							%i.icon-white.icon-fast-backward
+						.btn.btn-inverse{:onclick => "player.stopVideo();"}
+							%i.icon-white.icon-stop
+						.btn.btn-inverse{:onclick => "player.playVideo();"}
+							%i.icon-white.icon-play
+						.btn.btn-inverse{:onclick => "player.pauseVideo();"}
+							%i.icon-white.icon-pause
+						.btn.btn-inverse{:onclick => "player.nextVideo();"}
+							%i.icon-white.icon-fast-forward
+		.row
+			.span6
+				#player
+					.alert.alert-error
+						%p
+							%strong FFFFFFFUUUUUUUUUUUU
+						%p
+							There was an error causing the YouTube video not to load.
+						%p
+							Most likely the abscence of Flash. Try installing
+							%a{:href => "//get.adobe.com/flashplayer"} Flash Player.
+			.span6
+				%ol#tracks
+					- @tracks.each_with_index do |track, index|
+						%li.track{:'data-video-id' => track[:video_id]}
+							%h5{:onclick => "player.playVideoAt(#{index})"}
+								= track['name']
+								%i.notification.icon-play
+								%i.notification.icon-pause
+								%i.notification.icon-stop
+
+	%script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.js" }
+	%script{ :src => "//ajax.googleapis.com/ajax/libs/swfobject/2.1/swfobject.js" }
+	%script{ :src => "/js/bootstrap.min.js" }
+	%script{ :src => "/js/enquire.min.js" }
+	%script{ :src => "/js/main.js" }
+	:javascript
+		(function(c,a){window.mixpanel=a;var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.1.min.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?
+		g=a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.identify people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1})(document,window.mixpanel||[]);
+		mixpanel.init("f225ac14c93aa8913855140f3c451f0d");

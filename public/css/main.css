@@ -1,0 +1,45 @@
+/*
+ * Global CSS
+ */
+
+body
+{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+h1
+{
+	white-space: nowrap;
+}
+
+h1 small
+{
+	font-weight: 300;
+}
+
+h1, h5
+{
+	font-weight: 400;
+}
+
+.page-header .form-search
+{
+	margin: 10px auto;
+}
+
+.page-header .btn-group
+{
+	margin-left: 20px;
+}
+
+.track h5
+{
+	cursor: pointer;
+}
+
+.centre
+{
+	text-align: center;
+	margin: 40px auto 0;
+}
